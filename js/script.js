@@ -36,7 +36,7 @@ $(document).ready(function(){
 		};
 	};
 
-	function Song(name,source, image){
+	function Song(name,source,image){
 		this.name = name;
 		this.source = new Audio(source);
 		this.image = image || 'images/default.png' 
@@ -55,6 +55,8 @@ $(document).ready(function(){
 			$('#shown-list').append('<li id="changeme">'+ juke.library[i].name +'</li>');
 			$('#changeme').attr('id', 'song-' + i )
 		};
+		$('#gba-screen').html('<img id="song-image"></img>');
+		$('#song-image').attr('src', juke.activeSong.image);
 	};
 
 	function songTime(){
@@ -75,17 +77,16 @@ $(document).ready(function(){
 	//========== Load Songs =========
 	juke = new JukeBox();
 
-	juke.load(new Song('Cow Boy Bebop - Tank', 'http://66.90.91.26/ost/cowboy-bebop-original-soundtrack-1/arqilhpcfm/01-tank-.mp3'));
-	juke.load(new Song('Super Mario - Super Mario Theme', 'http://216.227.134.162/ost/super-mario-bros/gipwwbutdn/01-super-mario-bros.mp3'));
-	juke.load(new Song('Donkey Kong - Main Theme','http://66.90.91.26/ost/donkey-kong/cfvlgywjmy/01-donkey-kong-main-theme.mp3'));
-	juke.load(new Song('Legend Of Zelda - Hyrule','http://66.90.91.26/ost/the-legend-of-zelda-ocarina-of-time/isypfqxutb/05-hyrule.mp3'));
-	juke.load(new Song('Pokemon R/B/Y - Opening 02','http://216.227.134.162/ost/pokemon-yellow-blue-red-gb-/anzxhdjify/02-opening-part-2-.mp3'));
-	juke.load(new Song('Pokemon R/B/Y - Pallet Town', 'http://216.227.134.162/ost/pokemon-yellow-blue-red-gb-/enbncmjnbz/03-pallet-town-s-theme.mp3'))
-	juke.load(new Song('Pokemon R/B/Y - Pokemon Center', 'http://216.227.134.162/ost/pokemon-yellow-blue-red-gb-/cfiwmzorbz/11-pokemon-center.mp3'))
-	juke.load(new Song('Contra - Battle in the jungle','http://66.90.91.26/ost/contra-arcade-/mncykvgimj/03-battle-in-the-jungle.mp3'));
-	juke.load(new Song('Metroid - Zero Mission', 'http://216.227.134.162/ost/metroid-zero-mission/oryzpqxvxa/39-fully-powered-suit.mp3'))
-	juke.load(new Song('Mega-man(NES) - Enemy Chosen','http://216.227.134.162/ost/mega-man-nes-/rtuxcyfckh/02-enemy-chosen.mp3'))
-	juke.load(new Song('Mega-man(NES) - Ice Man','http://216.227.134.162/ost/mega-man-nes-/hmgsoamvhp/03-ice-man.mp3'))
+	juke.load(new Song('Super Mario - Super Mario Theme', 'http://216.227.134.162/ost/super-mario-bros/gipwwbutdn/01-super-mario-bros.mp3','http://wiiudaily.com/wp-content/uploads/2016/04/super_mario_bros.0.png'));
+	juke.load(new Song('Donkey Kong - Main Theme','http://66.90.91.26/ost/donkey-kong/cfvlgywjmy/01-donkey-kong-main-theme.mp3','http://thedoteaters.com/tde/wp-content/uploads/2013/06/fc-donkey-kong-snap-1024x960.png'));
+	juke.load(new Song('Legend Of Zelda - Hyrule','http://66.90.91.26/ost/the-legend-of-zelda-ocarina-of-time/isypfqxutb/05-hyrule.mp3','http://www.classic-retro-games.com/_shots/95/legend_of_zelda_remake_03.jpg'));
+	juke.load(new Song('Pokemon R/B/Y - Opening 02','http://216.227.134.162/ost/pokemon-yellow-blue-red-gb-/anzxhdjify/02-opening-part-2-.mp3','https://i.ytimg.com/vi/h6jUSIxCx-k/maxresdefault.jpg'));
+	juke.load(new Song('Pokemon R/B/Y - Pallet Town', 'http://216.227.134.162/ost/pokemon-yellow-blue-red-gb-/enbncmjnbz/03-pallet-town-s-theme.mp3','https://i.ytimg.com/vi/h6jUSIxCx-k/maxresdefault.jpg'))
+	juke.load(new Song('Pokemon R/B/Y - Pokemon Center', 'http://216.227.134.162/ost/pokemon-yellow-blue-red-gb-/cfiwmzorbz/11-pokemon-center.mp3','images/pika.gif'))
+	juke.load(new Song('Contra - Battle in the jungle','http://66.90.91.26/ost/contra-arcade-/mncykvgimj/03-battle-in-the-jungle.mp3','http://a5.phobos.apple.com/us/r1000/032/Purple/ba/09/c7/mzl.ttagqhaa.320x480-75.jpg'));
+	juke.load(new Song('Metroid - Zero Mission', 'http://216.227.134.162/ost/metroid-zero-mission/oryzpqxvxa/39-fully-powered-suit.mp3','https://i.ytimg.com/vi/XMdaXeKtuaA/maxresdefault.jpg'))
+	juke.load(new Song('Mega-man(NES) - Enemy Chosen','http://216.227.134.162/ost/mega-man-nes-/rtuxcyfckh/02-enemy-chosen.mp3','http://www.blogcdn.com/www.joystiq.com/media/2008/09/mm9screen01.jpg'))
+	juke.load(new Song('Mega-man(NES) - Ice Man','http://216.227.134.162/ost/mega-man-nes-/hmgsoamvhp/03-ice-man.mp3','http://www.blogcdn.com/www.joystiq.com/media/2008/09/mm9screen01.jpg'))
 
 	juke.activeSong = juke.library[0]
 	//==================================
