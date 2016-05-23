@@ -47,7 +47,7 @@ $(document).ready(function(){
 		this.songs = [];
 	};
 	//========================================
-	//=Z========Helper Functions===============
+	//=========Helper Functions===============
 	function loadElements(){
 		// Show active song title
 		$('#title').html(juke.activeSong.name);
@@ -57,10 +57,18 @@ $(document).ready(function(){
 			$('#shown-list').append('<li id="changeme" class="song-selector">'+ juke.library[i].name +'</li>');
 			if (juke.library[i].name == juke.activeSong.name){
 				$('#changeme').css('background-color', '#1e90ff');
-				$('#changeme').css('color', 'black')
+				$('#changeme').css('color', 'black');
 			}
 			$('#changeme').attr('id', 'song-' + i )
 		};
+		$('.song-selector').on('click', function(){
+			var str = parseInt($(this).attr('id').match(/\d+/));
+
+			juke.stopSong();
+			juke.activeSong.source.load()
+			juke.activeSong = juke.library[str];
+			juke.playSong();
+		});
 		// Load song image to gba screen
 		$('#gba-screen').html('<img id="song-image"></img>');
 		$('#song-image').attr('src', juke.activeSong.image);
@@ -75,8 +83,8 @@ $(document).ready(function(){
 	};
 
 	function songProgress(){
-		trackW = parseInt($('#tracker-container').css('width')) - 20;
-		multi = juke.activeSong.source.currentTime/juke.activeSong.source.duration;
+		var trackW = parseInt($('#tracker-container').css('width')) - 20;
+		var multi = juke.activeSong.source.currentTime/juke.activeSong.source.duration;
 		return trackW * multi
 	};
 	//===============================
@@ -91,11 +99,11 @@ $(document).ready(function(){
 	juke.load(new Song('Pokemon R/B/Y - Pallet Town', 'http://216.227.134.162/ost/pokemon-yellow-blue-red-gb-/enbncmjnbz/03-pallet-town-s-theme.mp3','https://i.ytimg.com/vi/h6jUSIxCx-k/maxresdefault.jpg'))
 	juke.load(new Song('Pokemon R/B/Y - Pokemon Center', 'http://216.227.134.162/ost/pokemon-yellow-blue-red-gb-/cfiwmzorbz/11-pokemon-center.mp3','images/pika.gif'))
 	juke.load(new Song('Contra - Battle in the jungle','http://66.90.91.26/ost/contra-arcade-/mncykvgimj/03-battle-in-the-jungle.mp3','http://a5.phobos.apple.com/us/r1000/032/Purple/ba/09/c7/mzl.ttagqhaa.320x480-75.jpg'));
-	juke.load(new Song('Metroid - Zero Mission', 'http://216.227.134.162/ost/metroid-zero-mission/oryzpqxvxa/39-fully-powered-suit.mp3','https://i.ytimg.com/vi/XMdaXeKtuaA/maxresdefault.jpg'))
-	juke.load(new Song('Mega-man(NES) - Enemy Chosen','http://216.227.134.162/ost/mega-man-nes-/rtuxcyfckh/02-enemy-chosen.mp3','http://www.blogcdn.com/www.joystiq.com/media/2008/09/mm9screen01.jpg'))
-	juke.load(new Song('Mega-man(NES) - Ice Man','http://216.227.134.162/ost/mega-man-nes-/hmgsoamvhp/03-ice-man.mp3','http://www.blogcdn.com/www.joystiq.com/media/2008/09/mm9screen01.jpg'))
+	juke.load(new Song('Metroid - Zero Mission', 'http://216.227.134.162/ost/metroid-zero-mission/oryzpqxvxa/39-fully-powered-suit.mp3','https://i.ytimg.com/vi/XMdaXeKtuaA/maxresdefault.jpg'));
+	juke.load(new Song('Mega-man(NES) - Enemy Chosen','http://216.227.134.162/ost/mega-man-nes-/rtuxcyfckh/02-enemy-chosen.mp3','http://www.blogcdn.com/www.joystiq.com/media/2008/09/mm9screen01.jpg'));
+	juke.load(new Song('Mega-man(NES) - Ice Man','http://216.227.134.162/ost/mega-man-nes-/hmgsoamvhp/03-ice-man.mp3','http://www.blogcdn.com/www.joystiq.com/media/2008/09/mm9screen01.jpg'));
 
-	juke.activeSong = juke.library[0]
+	juke.activeSong = juke.library[0];
 	//==================================
 
 	//========= Load Jukebox elements========
@@ -108,20 +116,20 @@ $(document).ready(function(){
 
 
 	//============ Event Listeners ============
-	$('#pause').on('click',function(){
+	$('#b-button').on('click',function(){
 		juke.pauseSong();
 	});
-	$('#play').on('click',function(){
+	$('#a-button').on('click',function(){
 		juke.playSong();
 	});
-	$('#prev').on('click', function(){
+	$('#left-button').on('click', function(){
 		juke.stopSong();
 		juke.activeSong.source.load();
 		var n = juke.getIndex()-1 < 0 ? juke.library.length - 1: juke.getIndex()-1;
 		juke.activeSong = juke.library[n]
 		juke.playSong();
 	});
-	$('#next').on('click', function(){
+	$('#right-button').on('click', function(){
 		juke.stopSong();
 		juke.activeSong.source.load();
 		var n = juke.getIndex()+1 > juke.library.length -1 ? 0 : juke.getIndex()+1;
@@ -131,12 +139,29 @@ $(document).ready(function(){
 	$(document).on('click',function(event){
 		loadElements();
 	});
+	$('#d-pad').on('click', function(){
+		$('#modal').css('display','block');
+	});
+	$('#modal-close').on('click', function(){
+		$('#modal').css('display', 'none');
+	});
 	$('#tracker-container').on('click',function(event){
 		console.log(event.offsetX)
-		var playhead = $('#playhead')
-		playhead.attr('style',
-		 playhead.attr('style') + 'margin-left: '+ event.offsetX+ 'px;');
+		var playhead = $('#playhead');
+		var mult = event.offsetX/(parseInt($('#tracker-container').css('width')) - 20);
+		juke.activeSong.source.currentTime = mult * juke.activeSong.source.duration;
 	});
+	$('#new-song-btn').on('click', function(){
+		var title = $('#new-song-title').val();
+		$('#new-song-title').val('')
+		var	url = $('#new-song-url').val();
+		$('#new-song-url').val('')
+		var image = $('#new-song-image').val();
+		$('#new-song-image').val('');
+
+		juke.load(new Song(title,url,image));
+	});
+
 	//=================================================
 	//================== Animation ====================
 	// $('#playhead-img').animate

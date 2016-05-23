@@ -43,7 +43,7 @@ body {
   position: relative;
   /* margin-left: 190px; */
   /* margin-top: -57px; */
-  bottom: 58px;
+  bottom: 123px;
   left: 191px;
   font-family: "VT323";
   color: white; }
@@ -53,14 +53,28 @@ body {
   height: 43px;
   position: relative;
   left: 593px;
-  top: 83px; }
+  top: 82px; }
 
 #b-button {
   width: 41px;
   height: 43px;
   position: relative;
   left: 533px;
-  top: 62px; }
+  top: 61px; }
+
+#right-button {
+  width: 33px;
+  height: 33px;
+  position: relative;
+  left: 110px;
+  top: 12px; }
+
+#left-button {
+  width: 33px;
+  height: 33px;
+  position: relative;
+  left: 57px;
+  top: -22px; }
 
 #title {
   text-align: center;
@@ -69,6 +83,53 @@ body {
   float: right;
   margin-bottom: 0;
   color: #c50206; }
+
+#modal {
+  background: url("../images/mario.gif") no-repeat;
+  background-size: cover;
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  top: 200px;
+  left: 590px;
+  border-radius: 10px;
+  display: none; }
+  #modal p {
+    float: right;
+    margin-right: 20px; }
+    #modal p:hover {
+      color: #c50206;
+      cursor: pointer; }
+  #modal h2 {
+    font-family: "VT323";
+    text-align: center; }
+  #modal .modal-txt {
+    display: block;
+    border: none;
+    border-radius: 5px;
+    background: #999999;
+    font-size: 25px;
+    font-family: "VT323";
+    color: #c50206;
+    height: 30px;
+    width: 300px;
+    margin: 20px auto; }
+  #modal button {
+    border-radius: 10px;
+    display: block;
+    height: 20px;
+    width: 100px;
+    margin: 0 auto; }
+
+::-webkit-input-placeholder {
+  color: black; }
+
+#d-pad {
+  height: 82px;
+  width: 80px;
+  position: relative;
+  bottom: -110px;
+  left: 34px; }
 
 #shown-list {
   list-style: none;
