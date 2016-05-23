@@ -49,12 +49,19 @@ $(document).ready(function(){
 	//========================================
 	//=Z========Helper Functions===============
 	function loadElements(){
+		// Show active song title
 		$('#title').html(juke.activeSong.name);
+		// List out songs in library
 		$('#shown-list').html('');
 		for(var i = 0; i < juke.library.length; i++){
-			$('#shown-list').append('<li id="changeme">'+ juke.library[i].name +'</li>');
+			$('#shown-list').append('<li id="changeme" class="song-selector">'+ juke.library[i].name +'</li>');
+			if (juke.library[i].name == juke.activeSong.name){
+				$('#changeme').css('background-color', '#1e90ff');
+				$('#changeme').css('color', 'black')
+			}
 			$('#changeme').attr('id', 'song-' + i )
 		};
+		// Load song image to gba screen
 		$('#gba-screen').html('<img id="song-image"></img>');
 		$('#song-image').attr('src', juke.activeSong.image);
 	};
@@ -132,7 +139,7 @@ $(document).ready(function(){
 	});
 	//=================================================
 	//================== Animation ====================
-	$('#playhead-img').animate
+	// $('#playhead-img').animate
 	//=================================================	
 	//====== Run things that update every second ======
 	setInterval(function(){
