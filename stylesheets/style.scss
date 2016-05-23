@@ -1,0 +1,100 @@
+$main-font: 'VT323' ;
+$nintendo-grey: #999999;
+$nes-red: #c50206;
+img{
+	width: 100%;
+}
+
+body{
+	background: url('../images/background.png') no-repeat center center fixed;
+	background-size: cover;
+}
+
+#playhead{
+	overflow: hidden;
+	border-radius: 10px; 
+	width: 20px;
+	height:20px;
+}
+
+#tracker-container{
+	width: 330px; 
+	height: 20px; 
+	background: $nintendo-grey; 
+	margin-left: 175px;
+	border-radius: 10px; 
+	box-shadow: 2px 2px;
+}
+
+#gameboy{
+	background: url('../images/Game_boy.png');
+	width: 660px;
+	height: 380px;
+	margin: 0 auto;
+}
+
+#nes-controller{
+	font-family: $main-font;
+	color:white;
+	background: url('../images/nes_controller.jpg') no-repeat;
+	background-size: contain;
+	width: 440px;
+	height: 275px;
+	margin: 0 auto;
+	border: 10px solid $nintendo-grey;
+}
+
+#gba-screen{
+	background: black;
+	width: 300px;
+	height: 200px;
+  position: relative;
+  /* margin-left: 190px; */
+  /* margin-top: -57px; */
+  bottom: 58px;
+  left: 191px;
+	font-family: $main-font;
+	color:white;
+}
+
+#a-button{
+	width:41px;
+	height:43px;
+	position: relative;
+	left: 593px;
+	top:83px;
+}
+
+#b-button{
+	width:41px;
+	height:43px;
+	position: relative;
+	left: 533px;
+	top: 62px;
+}
+#title{
+	text-align: center;
+	height: 45px;
+	width:301px;
+	float: right;
+	margin-bottom: 0;
+	color: $nes-red
+}
+#shown-list{
+	list-style: none;
+	overflow:scroll;
+	overflow-x : hidden;
+	height: 194px;
+	width:301px;
+	float: right;
+	li{
+		padding: 5px;
+		background: $nintendo-grey;
+		border-radius: 5px;
+		margin: 10px 0px;
+		color: $nes-red;
+	};
+}
+
+
+
